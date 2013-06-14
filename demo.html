@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bootstrap railmap demo</title>
+
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap-railmap.css">
+
+    <!-- from the bootstrap narrow container template -->
+    <style type="text/css">
+      body {
+        padding-top: 20px;
+        padding-bottom: 40px;
+      }
+
+      /* Custom container */
+      .container-narrow {
+        margin: 0 auto;
+        max-width: 700px;
+      }
+      .container-narrow > hr {
+        margin: 30px 0;
+      }
+    </style>
+</head>
+<body>
+    <div class="container-narrow">
+
+      <div class="masthead">
+        <h3 class="muted">Bootstrap railmap</h3>
+      </div>
+
+      <hr>
+
+        <div id="railmap" class="alert alert-info hide">
+            <p>Optional header text explaining what you are doing</p>
+
+            <ul>
+                <li data-name="grand central station">Grand Central Station</li>
+                <li data-name="berlin hauptbahnhof">Berlin Hauptbahnhof</li>
+                <li data-name="kanazawa station">Kanazawa Station</li>
+                <li data-name="Shanghai South">Shanghai South</li>
+                <li data-name="kings cross station">Kings Cross Station</li>
+            </ul>
+
+            <div id="application-summary" class="hide"></div>
+            <unpaid-applications-summary class="hide" />
+        </div>
+    </div>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+    String.prototype.format = function (col) {
+        col = typeof col === 'object' ? col : Array.prototype.slice.call(arguments, 0);
+
+        return this.replace(/\{\{|\}\}|\{(\w+)\}/g, function (m, n) {
+            if (m == "{{") { return "{"; }
+            if (m == "}}") { return "}"; }
+            return col[n];
+        });
+    };
+    </script>
+    <script src="js/bootstrap-railmap.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        var railmap = $('#railmap');
+
+
+            railmap.railmap().fadeIn('slow')
+                .on("returning-to-exam-selection", function(e) {
+                    e.preventDefault();
+
+                    $(e.target_stop).popoverDialog('show');
+                })
+                .on("returning-to-attestation", function(e) {
+                    e.preventDefault();
+                }).promise().done(function() {
+                    railmap.railmap('next');
+                });
+
+
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+div.railmap > ul {
+    margin: 0;
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+}
+
+div.railmap > ul > li {
+    display: table-cell;
+}
+
+li.railstop {
+    text-align: center;
+}
+
+li.railstop:first-of-type {
+    text-align: left;
+}
+
+li.railstop:last-of-type {
+    text-align: right;
+}
+
+li.railstop.railstop-complete {
+    color: rgba(58, 135, 171, 0.5);
+    transition: color .25s ease-in-out;
+    -moz-transition: color .25s ease-in-out;
+    -webkit-transition: color .25s ease-in-out;
+}
+
+li.railstop.railstop-complete:hover {
+    cursor: default;
+}
+
+li.railstop.railstop-complete:hover {
+    color: rgba(58, 135, 171, 0.8);
+}
+
+
+/* railstop look and placement
+ *
+ * cheers for help with the css implementation
+ *   http://designshack.net/articles/css/four-simple-and-fun-css-button-hover-effects-for-beginners/
+ */
+div.railmap > div.progress {
+    height: 4px;
+
+    /* margin calculation:
+            (progress height + icon height + icon top border + icon bottom border) / 2
+     */
+    margin-bottom: -12px;
+    margin-top: 12px;
+}
+
+span.railstop-icon {
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+
+    border: 3px solid #eee;
+
+    /* circular rail stops */
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    border-radius: 25px;
+
+    background: #eee;
+    background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.12));
+    background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.12));
+    background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.12));
+    background-image: -ms-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.12));
+    background-image: linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.12));
+
+    -webkit-transition: All 0.5s ease;
+    -moz-transition: All 0.5s ease;
+    -o-transition: All 0.5s ease;
+    -ms-transition: All 0.5s ease;
+    transition: All 0.5s ease;
+}
+
+.railstop-visited > .railstop-icon {
+    background-color: #eee;
+    border-color: #70b9fc;
+}
+
+.railstop-complete > .railstop-icon {
+    border-color: #0480be;
+    background-color: #0480be;
+}
+
+.railstop-active > .railstop-icon {
+    background-color: #eee;
+    border-color: #0480be;
+}
+
+.railstop-complete:hover > span.railstop-icon,
+.railstop-active:hover > span.railstop-icon
+{
+    border-color: #48b7ef;
+    background-color: #fff;
+}
