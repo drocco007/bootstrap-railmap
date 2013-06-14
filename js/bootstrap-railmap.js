@@ -21,6 +21,8 @@
         setupContent: function() {
             var railmap = this;
 
+            this.removeWhitespaceNodes();
+
             $('li', this.$element).addClass('railstop muted').prepend($(this.options.stop_template))
                 .each(function(index, element) { $(element).data('stop_number', index + 1)})
                 .on('click', function(e) {
@@ -31,20 +33,36 @@
                 });
             this.$element.addClass('railmap');
 
-            $('.railstop:first').addClass('railstop-active').removeClass('muted')
+            $('.railstop:first', this.$element)
+                .addClass('railstop-first railstop-active').removeClass('muted')
                 .parent().before(this.options.rail_template);
+
+            $('.railstop:last', this.$element).addClass('railstop-last');
+        },
+
+        removeWhitespaceNodes: function() {
+            // Converted from display: table to inline-block for better
+            // browser compatibility. However, white space between
+            // inline-block elements will be rendered by the browser
+            // as a visible space.
+
+            // This removes any whitespace-only text elements
+            //     http://stackoverflow.com/a/12480764
+            $($('ul', this.$element)[0].childNodes).each(function() {
+                $(this).html() || $(this).remove();
+            });
         },
 
         calculateWidths: function () {
             this.inner_width = 100.0 / ($('li', this.$element).length - 1);
             var first_last_width = this.inner_width / 2;
 
-            $('li.railstop').width('{0}%'.format(this.inner_width));
-            $('li.railstop:first, li.railstop:last').width('{0}%'.format(first_last_width));
+            $('li.railstop', this.$element).width('{0}%'.format(this.inner_width));
+            $('li.railstop:first, li.railstop:last', this.$element).width('{0}%'.format(first_last_width));
         },
 
         _nth_stop: function(stop_number) {
-            return $('li.railstop:nth-of-type({0})'.format(stop_number), this.$element);
+            return $('li.railstop:nth({0})'.format(stop_number - 1), this.$element);
         },
 
         stopName: function(stop_number) {

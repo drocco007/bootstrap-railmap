@@ -23,11 +23,20 @@
         margin: 30px 0;
       }
     </style>
+
+    <!--[if lte IE 8]>
+    <style>
+        li.railstop {
+            float: left;
+        }
+    </style>
+    <![endif]-->
+
 </head>
 <body>
     <div class="container-narrow">
 
-      <div class="masthead">
+      <div>
         <h3 class="muted">Bootstrap railmap</h3>
       </div>
 
@@ -43,9 +52,6 @@
                 <li data-name="Shanghai South">Shanghai South</li>
                 <li data-name="kings cross station">Kings Cross Station</li>
             </ul>
-
-            <div id="application-summary" class="hide"></div>
-            <unpaid-applications-summary class="hide" />
         </div>
     </div>
 
@@ -53,7 +59,7 @@
     <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
 
     <script type="text/javascript">
-    String.prototype.format = function (col) {
+    String.prototype.format = function(col) {
         col = typeof col === 'object' ? col : Array.prototype.slice.call(arguments, 0);
 
         return this.replace(/\{\{|\}\}|\{(\w+)\}/g, function (m, n) {
@@ -69,18 +75,17 @@
         var railmap = $('#railmap');
 
 
-            railmap.railmap().fadeIn('slow')
-                .on("returning-to-exam-selection", function(e) {
-                    e.preventDefault();
+        railmap.railmap().fadeIn('slow')
+            .on("returning-to-exam-selection", function(e) {
+                e.preventDefault();
 
-                    $(e.target_stop).popoverDialog('show');
-                })
-                .on("returning-to-attestation", function(e) {
-                    e.preventDefault();
-                }).promise().done(function() {
-                    railmap.railmap('next');
-                });
-
+                $(e.target_stop).popoverDialog('show');
+            })
+            .on("returning-to-attestation", function(e) {
+                e.preventDefault();
+            }).promise().done(function() {
+                railmap.railmap('next');
+            });
 
     });
     </script>

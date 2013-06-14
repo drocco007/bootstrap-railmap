@@ -1,23 +1,22 @@
 div.railmap > ul {
     margin: 0;
-    display: table;
-    table-layout: fixed;
     width: 100%;
 }
 
 div.railmap > ul > li {
-    display: table-cell;
+    display: inline-block;
+    vertical-align: top;
 }
 
 li.railstop {
     text-align: center;
 }
 
-li.railstop:first-of-type {
+li.railstop-first {
     text-align: left;
 }
 
-li.railstop:last-of-type {
+li.railstop-last {
     text-align: right;
 }
 
