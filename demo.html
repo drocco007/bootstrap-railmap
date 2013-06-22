@@ -36,11 +36,9 @@
 <body>
     <div class="container-narrow">
 
-      <div>
-        <h3 class="muted">Bootstrap railmap</h3>
-      </div>
-
-      <hr>
+        <div class="page-header">
+            <h2>Bootstrap railmap <small>v. 0.4</small></h2>
+        </div>
 
         <div id="railmap" class="alert alert-info hide">
             <p>Optional header text explaining what you are doing</p>
@@ -50,7 +48,7 @@
                 <li data-name="berlin hauptbahnhof">Berlin Hauptbahnhof</li>
                 <li data-name="kanazawa station">Kanazawa Station</li>
                 <li data-name="Shanghai South">Shanghai South</li>
-                <li data-name="kings cross station">Kings Cross Station</li>
+                <li data-name="kings cross station">King's Cross Station</li>
             </ul>
         </div>
     </div>
@@ -74,19 +72,9 @@
     $(function() {
         var railmap = $('#railmap');
 
-
-        railmap.railmap().fadeIn('slow')
-            .on("returning-to-exam-selection", function(e) {
-                e.preventDefault();
-
-                $(e.target_stop).popoverDialog('show');
-            })
-            .on("returning-to-attestation", function(e) {
-                e.preventDefault();
-            }).promise().done(function() {
-                railmap.railmap('next');
-            });
-
+        railmap.railmap().fadeIn('slow', function() {
+            railmap.railmap('next');
+        });
     });
     </script>
 </body>
