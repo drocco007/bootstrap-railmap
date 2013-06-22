@@ -20,6 +20,13 @@ into a visual navigation aid to help your users orient themselves during
 multistep interactions with your application.
 
 
+`See it in action`__
+
+.. _demo: http://htmlpreview.github.io/?https://github.com/drocco-007/bootstrap-railmap/blob/master/demo.html
+
+__ demo_
+
+
 ----
 
 © 2013 BrightLink. Licensed under the Apache2 license.
